@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,30 +20,41 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title: Text("HOME")),
-      body:HomePageWidget()
-
-
-    );
+        appBar: AppBar(title: Text("HOME")), body: HomePageWidget());
   }
 }
 
-class HomePageWidget extends StatelessWidget {
+class HomePageWidget extends StatefulWidget {
+  @override
+  _HomePageWidgetState createState() => _HomePageWidgetState();
+}
+
+class _HomePageWidgetState extends State<HomePageWidget> {
+  final controller = TextEditingController();
+  String text="";
+  void changeText(tex)
+  {
+    setState(() {
+      this.text=tex;
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      alignment: Alignment.center,
-      child: Text("HAAAIII",style: TextStyle(color: Colors.red),),
+    return Column(
+      children: <Widget>[
+        TextField(
+          controller: this.controller,
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.chat_rounded), labelText: "type here"),
+          onChanged: (te)=> this.changeText(te),
+        ),
+        Text(this.text)
+      ],
     );
   }
 }
-
-
-
-
